@@ -9,6 +9,7 @@ use Psalm\Plugin\PluginEntryPointInterface;
 use Psalm\Plugin\RegistrationInterface;
 use SimpleXMLElement;
 use Weirdan\DoctrinePsalmPlugin\Provider\ReturnTypeProvider\CollectionFirstAndLast;
+use Weirdan\DoctrinePsalmPlugin\Taint\SqlSinks;
 
 use function array_merge;
 use function class_exists;
@@ -27,6 +28,10 @@ class Plugin implements PluginEntryPointInterface
 
         if (class_exists(CollectionFirstAndLast::class)) {
             $psalm->registerHooksFromClass(CollectionFirstAndLast::class);
+        }
+
+        if (class_exists(SqlSinks::class)) {
+            $psalm->registerHooksFromClass(SqlSinks::class);
         }
     }
 
